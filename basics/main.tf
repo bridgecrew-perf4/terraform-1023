@@ -1,14 +1,14 @@
 # Download the latest nginx image
-resource "docker_image" "nginx" {
-  name = "docker.io/nginx:latest"
+resource "docker_image" "image" {
+  name = "${var.image_name}"
 }
 
 # Start a container
-resource "docker_container" "nginx" {
-  name  = "nginx"
-  image = "${docker_image.nginx.latest}"
+resource "docker_container" "container" {
+  name  = "${var.container_name}"
+  image = "${docker_image.image.latest}"
   ports {
-    internal = "80"
-    external = "9090"
+    internal = "${var.int_port}"
+    external = "${var.ext_port}"
   }
 }
